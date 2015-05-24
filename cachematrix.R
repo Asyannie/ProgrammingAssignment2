@@ -2,28 +2,32 @@
 ## functions do
 
 ## Write a short comment describing this function
+makeCacheMatri<-function(x=matrix()){
+s<-NULL
+set<-function(y){
+x<<-y
+s<<-NULL
+}
+get<-function(){
+x 
+}
+setsolve<-function(solve){
+s<<-solve
+}
+getsolve<-function(){
+s 
+}
+b<<-list(set=set,get=get,setsolve=setsolve,getsolve=getsolve)
 
-makeCacheMatri<-function(x = matrix()){
-        inv <-NULL
-        set <-function(y) {
-                x <<-y
-                m <<-NULL
-        }
-        get <-function() x
-        setinv<-function(solve) inv <<-solve
-        getinv <-function() inv
-        list(set = set, get = get,
-             setinv = setinv,
-             getinv = getinv)
-} 
-cacheSolve <-function(x,...) {
-        inv<-x$getinv()
-        if(!is.null(inv)) {
-                message("getting cached data")
-                return(inv)
-        }
-        data <-x$get()
-        inv<-solve(data,...)
-        x$setinv(inv)
-        inv
+}
+cacheSolve<-function(x,b,...){
+s<-b$getsolve() 
+if(!is.null(s)){ 
+message("getting cached data...") 
+return(s)
+}
+data<-b$get()
+s<-solve(data,...)
+b$setsolve(s)
+s
 }
